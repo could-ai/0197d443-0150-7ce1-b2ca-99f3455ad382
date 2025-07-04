@@ -29,17 +29,19 @@ class ChatScreen extends StatefulWidget {
 }
 
 class _ChatScreenState extends State<ChatScreen> {
-  final List<String> _messages = [
-    'Hello!',
-    'How are you?',
-    'I am fine, thank you!'
-  ];
+  final Map<String, List<String>> _contactMessages = {
+    'Contact 1': ['Hello from Contact 1'],
+    'Contact 2': ['Hello from Contact 2'],
+    'Contact 3': ['Hello from Contact 3'],
+  };
+
+  String _selectedContact = 'Contact 1';
   final TextEditingController _controller = TextEditingController();
 
   void _sendMessage() {
     if (_controller.text.isNotEmpty) {
       setState(() {
-        _messages.add(_controller.text);
+        _contactMessages[_selectedContact]?.add(_controller.text);
       });
       _controller.clear();
     }
@@ -51,91 +53,83 @@ class _ChatScreenState extends State<ChatScreen> {
       appBar: AppBar(
         title: const Text('Chat Dialog'),
         backgroundColor: Colors.deepPurple,
-        actions: [
-          IconButton(
-            icon: const Icon(Icons.contacts, color: Colors.white),
-            onPressed: () {
-              // Handle contact button press
-              showContacts();
-            },
-          ),
-        ],
       ),
-      body: Column(
+      body: Row(
         children: <Widget>[
+          // Contacts List
           Expanded(
-            child: ListView.builder(
-              itemCount: _messages.length,
-              itemBuilder: (context, index) {
+            flex: 1,
+            child: ListView(
+              children: _contactMessages.keys.map((contact) {
                 return ListTile(
                   title: Text(
-                    _messages[index],
-                    style: TextStyle(color: Colors.white),
-                  ),
-                );
-              },
-            ),
-          ),
-          const Divider(height: 1.0),
-          Container(
-            padding: const EdgeInsets.all(10.0),
-            child: Row(
-              children: <Widget>[
-                Expanded(
-                  child: TextField(
-                    controller: _controller,
-                    style: TextStyle(color: Colors.white),
-                    decoration: const InputDecoration(
-                      hintText: 'Send a message',
-                      hintStyle: TextStyle(color: Colors.white54),
-                      filled: true,
-                      fillColor: Colors.black12,
-                      enabledBorder: OutlineInputBorder(
-                        borderSide: BorderSide(color: Colors.white54),
-                      ),
-                      focusedBorder: OutlineInputBorder(
-                        borderSide: BorderSide(color: Colors.white),
-                      ),
+                    contact,
+                    style: TextStyle(
+                      color: _selectedContact == contact ? Colors.blue : Colors.white,
                     ),
                   ),
+                  onTap: () {
+                    setState(() {
+                      _selectedContact = contact;
+                    });
+                  },
+                );
+              }).toList(),
+            ),
+          ),
+          // Chat Messages
+          Expanded(
+            flex: 3,
+            child: Column(
+              children: <Widget>[
+                Expanded(
+                  child: ListView.builder(
+                    itemCount: _contactMessages[_selectedContact]?.length ?? 0,
+                    itemBuilder: (context, index) {
+                      return ListTile(
+                        title: Text(
+                          _contactMessages[_selectedContact]?[index] ?? '',
+                          style: TextStyle(color: Colors.white),
+                        ),
+                      );
+                    },
+                  ),
                 ),
-                IconButton(
-                  icon: const Icon(Icons.send, color: Colors.blue),
-                  onPressed: _sendMessage,
+                const Divider(height: 1.0),
+                Container(
+                  padding: const EdgeInsets.all(10.0),
+                  child: Row(
+                    children: <Widget>[
+                      Expanded(
+                        child: TextField(
+                          controller: _controller,
+                          style: TextStyle(color: Colors.white),
+                          decoration: const InputDecoration(
+                            hintText: 'Send a message',
+                            hintStyle: TextStyle(color: Colors.white54),
+                            filled: true,
+                            fillColor: Colors.black12,
+                            enabledBorder: OutlineInputBorder(
+                              borderSide: BorderSide(color: Colors.white54),
+                            ),
+                            focusedBorder: OutlineInputBorder(
+                              borderSide: BorderSide(color: Colors.white),
+                            ),
+                          ),
+                        ),
+                      ),
+                      IconButton(
+                        icon: const Icon(Icons.send, color: Colors.blue),
+                        onPressed: _sendMessage,
+                      ),
+                    ],
+                  ),
                 ),
               ],
             ),
           ),
         ],
       ),
-    );
-  }
-
-  void showContacts() {
-    // Example function to show contacts
-    showDialog(
-      context: context,
-      builder: (context) {
-        return AlertDialog(
-          title: Text('Contacts'),
-          content: SizedBox(
-            width: double.maxFinite,
-            child: ListView(
-              children: [
-                ListTile(
-                  title: Text('Contact 1'),
-                ),
-                ListTile(
-                  title: Text('Contact 2'),
-                ),
-                ListTile(
-                  title: Text('Contact 3'),
-                ),
-              ],
-            ),
-          ),
-        );
-      },
     );
   }
 }
