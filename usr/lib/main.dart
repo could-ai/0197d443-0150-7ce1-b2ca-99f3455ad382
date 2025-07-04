@@ -14,6 +14,7 @@ class MyApp extends StatelessWidget {
       debugShowCheckedModeBanner: false,
       theme: ThemeData(
         colorScheme: ColorScheme.fromSeed(seedColor: Colors.deepPurple),
+        scaffoldBackgroundColor: Colors.black,
       ),
       home: const ChatScreen(),
     );
@@ -33,6 +34,16 @@ class _ChatScreenState extends State<ChatScreen> {
     'How are you?',
     'I am fine, thank you!'
   ];
+  final TextEditingController _controller = TextEditingController();
+
+  void _sendMessage() {
+    if (_controller.text.isNotEmpty) {
+      setState(() {
+        _messages.add(_controller.text);
+      });
+      _controller.clear();
+    }
+  }
 
   @override
   Widget build(BuildContext context) {
@@ -59,6 +70,7 @@ class _ChatScreenState extends State<ChatScreen> {
               children: <Widget>[
                 Expanded(
                   child: TextField(
+                    controller: _controller,
                     decoration: const InputDecoration(
                       hintText: 'Send a message',
                     ),
@@ -66,9 +78,7 @@ class _ChatScreenState extends State<ChatScreen> {
                 ),
                 IconButton(
                   icon: const Icon(Icons.send),
-                  onPressed: () {
-                    // Send button pressed functionality to be implemented
-                  },
+                  onPressed: _sendMessage,
                 ),
               ],
             ),
