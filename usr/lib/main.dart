@@ -50,6 +50,7 @@ class _ChatScreenState extends State<ChatScreen> {
     return Scaffold(
       appBar: AppBar(
         title: const Text('Chat'),
+        backgroundColor: Colors.deepPurple,
       ),
       body: Column(
         children: <Widget>[
@@ -58,7 +59,10 @@ class _ChatScreenState extends State<ChatScreen> {
               itemCount: _messages.length,
               itemBuilder: (context, index) {
                 return ListTile(
-                  title: Text(_messages[index]),
+                  title: Text(
+                    _messages[index],
+                    style: TextStyle(color: Colors.white),
+                  ),
                 );
               },
             ),
@@ -71,13 +75,23 @@ class _ChatScreenState extends State<ChatScreen> {
                 Expanded(
                   child: TextField(
                     controller: _controller,
+                    style: TextStyle(color: Colors.white),
                     decoration: const InputDecoration(
                       hintText: 'Send a message',
+                      hintStyle: TextStyle(color: Colors.white54),
+                      filled: true,
+                      fillColor: Colors.black12,
+                      enabledBorder: OutlineInputBorder(
+                        borderSide: BorderSide(color: Colors.white54),
+                      ),
+                      focusedBorder: OutlineInputBorder(
+                        borderSide: BorderSide(color: Colors.white),
+                      ),
                     ),
                   ),
                 ),
                 IconButton(
-                  icon: const Icon(Icons.send),
+                  icon: const Icon(Icons.send, color: Colors.deepPurple),
                   onPressed: _sendMessage,
                 ),
               ],
