@@ -51,6 +51,15 @@ class _ChatScreenState extends State<ChatScreen> {
       appBar: AppBar(
         title: const Text('Chat Dialog'),
         backgroundColor: Colors.deepPurple,
+        actions: [
+          IconButton(
+            icon: const Icon(Icons.contacts, color: Colors.white),
+            onPressed: () {
+              // Handle contact button press
+              showContacts(); // Placeholder method
+            },
+          ),
+        ],
       ),
       body: Column(
         children: <Widget>[
@@ -99,6 +108,18 @@ class _ChatScreenState extends State<ChatScreen> {
           ),
         ],
       ),
+    );
+  }
+
+  void showContacts() {
+    // Example function to show contacts
+    showDialog(
+      context: context,
+      builder: (context) {
+        return AlertDialog(
+          content: Text('Display contacts here'),
+        );
+      },
     );
   }
 }
