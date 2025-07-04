@@ -56,7 +56,7 @@ class _ChatScreenState extends State<ChatScreen> {
             icon: const Icon(Icons.contacts, color: Colors.white),
             onPressed: () {
               // Handle contact button press
-              showContacts(); // Placeholder method
+              showContacts();
             },
           ),
         ],
@@ -117,7 +117,23 @@ class _ChatScreenState extends State<ChatScreen> {
       context: context,
       builder: (context) {
         return AlertDialog(
-          content: Text('Display contacts here'),
+          title: Text('Contacts'),
+          content: SizedBox(
+            width: double.maxFinite,
+            child: ListView(
+              children: [
+                ListTile(
+                  title: Text('Contact 1'),
+                ),
+                ListTile(
+                  title: Text('Contact 2'),
+                ),
+                ListTile(
+                  title: Text('Contact 3'),
+                ),
+              ],
+            ),
+          ),
         );
       },
     );
