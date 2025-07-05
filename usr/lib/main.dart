@@ -14,7 +14,7 @@ class MyApp extends StatelessWidget {
       debugShowCheckedModeBanner: false,
       theme: ThemeData(
         colorScheme: ColorScheme.fromSeed(seedColor: Colors.indigo),
-        scaffoldBackgroundColor: Colors.blueGrey[900], // Set the deep blue background color.
+        scaffoldBackgroundColor: Colors.blueGrey[900],
       ),
       home: const ChatScreen(),
     );
@@ -33,16 +33,16 @@ class _ChatScreenState extends State<ChatScreen> {
     'Lancelot': ['Hello from Lancelot'],
     'Susu': ['Hello from Susu'],
     'Cici': ['Hello from Cici'],
-    'didi': ['Hello from didi'],  // Added new contact
-    'timo': ['Hello from timo'],  // Added new contact
-    'bluesky': ['Hello from bluesky'],  // New contact
-    'couldai': ['Hello from couldai'],  // Added new contact
+    'didi': ['Hello from didi'],
+    'timo': ['Hello from timo'],
+    'bluesky': ['Hello from bluesky'],
+    'couldai': ['Hello from couldai'],
+    'aaa': ['Hello from aaa'], // 新的联系人
   };
 
   String _selectedContact = 'Lancelot';
   final TextEditingController _controller = TextEditingController();
 
-  // New variable to hold the background color.
   Color _backgroundColor = Colors.blueGrey[900]!;
 
   void _sendMessage() {
@@ -61,10 +61,9 @@ class _ChatScreenState extends State<ChatScreen> {
         title: const Text('Chat Dialog'),
         backgroundColor: Colors.indigo,
       ),
-      backgroundColor: _backgroundColor, // Use the selected background color
+      backgroundColor: _backgroundColor,
       body: Column(
         children: [
-          // Dropdown for selecting a background color
           Padding(
             padding: const EdgeInsets.all(8.0),
             child: Row(
@@ -94,7 +93,6 @@ class _ChatScreenState extends State<ChatScreen> {
           Expanded(
             child: Row(
               children: <Widget>[
-                // Contacts List
                 Expanded(
                   flex: 1,
                   child: ListView(
@@ -116,7 +114,6 @@ class _ChatScreenState extends State<ChatScreen> {
                     }).toList(),
                   ),
                 ),
-                // Chat Messages
                 Expanded(
                   flex: 3,
                   child: Column(
@@ -147,7 +144,7 @@ class _ChatScreenState extends State<ChatScreen> {
                                   hintText: 'Send a message',
                                   hintStyle: TextStyle(color: Colors.white70),
                                   filled: true,
-                                  fillColor: Colors.lightBlue[100], // Changed to light blue color
+                                  fillColor: Colors.lightBlue[100],
                                   enabledBorder: OutlineInputBorder(
                                     borderSide: BorderSide(color: Colors.indigo),
                                   ),
@@ -159,7 +156,7 @@ class _ChatScreenState extends State<ChatScreen> {
                               ),
                             ),
                             IconButton(
-                              icon: const Icon(Icons.send, color: Colors.blue), // Changed to blue color
+                              icon: const Icon(Icons.send, color: Colors.blue),
                               onPressed: _sendMessage,
                             ),
                           ],
