@@ -167,22 +167,23 @@ class _ChatScreenState extends State<ChatScreen> {
                       const Divider(height: 1.0),
                       Container(
                         padding: const EdgeInsets.all(10.0),
+                        color: Colors.black54,
                         child: Row(
                           children: <Widget>[
                             Expanded(
                               child: TextField(
                                 controller: _controller,
-                                style: TextStyle(color: Colors.black),
+                                style: TextStyle(color: Colors.white),
                                 decoration: InputDecoration(
                                   hintText: 'Send a message',
-                                  hintStyle: TextStyle(color: Colors.black54),
+                                  hintStyle: TextStyle(color: Colors.white54),
                                   filled: true,
-                                  fillColor: Colors.white,
+                                  fillColor: Colors.grey[800],
                                   enabledBorder: OutlineInputBorder(
-                                    borderSide: BorderSide(color: Colors.indigo),
+                                    borderSide: BorderSide(color: Colors.grey[700]!),
                                   ),
                                   focusedBorder: OutlineInputBorder(
-                                    borderSide: BorderSide(color: Colors.indigoAccent),
+                                    borderSide: BorderSide(color: Colors.blueAccent),
                                   ),
                                 ),
                                 onSubmitted: (_) => _sendMessage(),
