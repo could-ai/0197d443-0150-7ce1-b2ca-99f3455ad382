@@ -14,7 +14,7 @@ class MyApp extends StatelessWidget {
       debugShowCheckedModeBanner: false,
       theme: ThemeData(
         colorScheme: ColorScheme.fromSeed(seedColor: Colors.lightBlueAccent),
-        scaffoldBackgroundColor: Colors.white,
+        scaffoldBackgroundColor: Colors.white, // Ensure the scaffold background is white.
       ),
       home: const ChatScreen(),
     );
