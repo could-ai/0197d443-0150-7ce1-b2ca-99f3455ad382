@@ -35,6 +35,8 @@ class _ChatScreenState extends State<ChatScreen> {
     'Cici': ['Hello from Cici'],
     'didi': ['Hello from didi'],  // Added new contact
     'timo': ['Hello from timo'],  // Added new contact
+    'bluesky': ['Hello from bluesky'],  // New contact
+    'lancelot': ['Hello from lancelot'],  // New contact
   };
 
   String _selectedContact = 'Lancelot';
