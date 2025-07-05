@@ -32,12 +32,7 @@ class _ChatScreenState extends State<ChatScreen> {
   final Map<String, List<String>> _contactMessages = {
     'Lancelot': ['Hello from Lancelot'],
     'Susu': ['Hello from Susu'],
-    'Cici': ['Hello from Cici'],
-    'didi': ['Hello from didi'],
-    'timo': ['Hello from timo'],
-    'bluesky': ['Hello from bluesky'],
-    'couldai': ['Hello from couldai'],
-    'aaa': ['Hello from aaa'], // 新的联系人
+    'Cici': ['Hello from Cici']
   };
 
   String _selectedContact = 'Lancelot';
