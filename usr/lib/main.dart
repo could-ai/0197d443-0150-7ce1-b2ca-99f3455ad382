@@ -137,12 +137,12 @@ class _ChatScreenState extends State<ChatScreen> {
                             Expanded(
                               child: TextField(
                                 controller: _controller,
-                                style: TextStyle(color: Colors.white),
+                                style: TextStyle(color: Colors.black),
                                 decoration: InputDecoration(
                                   hintText: 'Send a message',
-                                  hintStyle: TextStyle(color: Colors.white70),
+                                  hintStyle: TextStyle(color: Colors.black54),
                                   filled: true,
-                                  fillColor: Colors.lightBlue[100],
+                                  fillColor: Colors.white,
                                   enabledBorder: OutlineInputBorder(
                                     borderSide: BorderSide(color: Colors.indigo),
                                   ),
@@ -154,7 +154,7 @@ class _ChatScreenState extends State<ChatScreen> {
                               ),
                             ),
                             IconButton(
-                              icon: const Icon(Icons.send, color: Colors.blue),
+                              icon: const Icon(Icons.send, color: Colors.indigo),
                               onPressed: _sendMessage,
                             ),
                           ],
