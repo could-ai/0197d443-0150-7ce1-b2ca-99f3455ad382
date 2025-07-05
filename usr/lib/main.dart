@@ -13,8 +13,8 @@ class MyApp extends StatelessWidget {
       title: 'Chat App',
       debugShowCheckedModeBanner: false,
       theme: ThemeData(
-        colorScheme: ColorScheme.fromSeed(seedColor: Colors.lightBlueAccent),
-        scaffoldBackgroundColor: Colors.white, // Ensure the scaffold background is white.
+        colorScheme: ColorScheme.fromSeed(seedColor: Colors.indigo),
+        scaffoldBackgroundColor: Colors.blueGrey[900], // Set the deep blue background color.
       ),
       home: const ChatScreen(),
     );
@@ -52,7 +52,7 @@ class _ChatScreenState extends State<ChatScreen> {
     return Scaffold(
       appBar: AppBar(
         title: const Text('Chat Dialog'),
-        backgroundColor: Colors.lightBlueAccent,
+        backgroundColor: Colors.indigo,
       ),
       body: Row(
         children: <Widget>[
@@ -65,7 +65,7 @@ class _ChatScreenState extends State<ChatScreen> {
                   title: Text(
                     contact,
                     style: TextStyle(
-                      color: _selectedContact == contact ? Colors.deepPurple : Colors.black87,
+                      color: _selectedContact == contact ? Colors.deepPurple : Colors.white,
                     ),
                   ),
                   onTap: () {
@@ -73,7 +73,7 @@ class _ChatScreenState extends State<ChatScreen> {
                       _selectedContact = contact;
                     });
                   },
-                  tileColor: _selectedContact == contact ? Colors.blue[50] : null,
+                  tileColor: _selectedContact == contact ? Colors.indigo[100] : null,
                 );
               }).toList(),
             ),
@@ -90,7 +90,7 @@ class _ChatScreenState extends State<ChatScreen> {
                       return ListTile(
                         title: Text(
                           _contactMessages[_selectedContact]?[index] ?? '',
-                          style: TextStyle(color: Colors.black87),
+                          style: TextStyle(color: Colors.white),
                         ),
                       );
                     },
@@ -104,24 +104,24 @@ class _ChatScreenState extends State<ChatScreen> {
                       Expanded(
                         child: TextField(
                           controller: _controller,
-                          style: TextStyle(color: Colors.black87),
+                          style: TextStyle(color: Colors.white),
                           decoration: InputDecoration(
                             hintText: 'Send a message',
-                            hintStyle: TextStyle(color: Colors.black38),
+                            hintStyle: TextStyle(color: Colors.white70),
                             filled: true,
-                            fillColor: Colors.blue[50],
+                            fillColor: Colors.indigo[100],
                             enabledBorder: OutlineInputBorder(
-                              borderSide: BorderSide(color: Colors.lightBlueAccent),
+                              borderSide: BorderSide(color: Colors.indigo),
                             ),
                             focusedBorder: OutlineInputBorder(
-                              borderSide: BorderSide(color: Colors.blue),
+                              borderSide: BorderSide(color: Colors.indigoAccent),
                             ),
                           ),
                           onSubmitted: (_) => _sendMessage(),
                         ),
                       ),
                       IconButton(
-                        icon: const Icon(Icons.send, color: Colors.lightBlueAccent),
+                        icon: const Icon(Icons.send, color: Colors.indigoAccent),
                         onPressed: _sendMessage,
                       ),
                     ],
