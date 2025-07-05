@@ -143,7 +143,7 @@ class _ChatScreenState extends State<ChatScreen> {
                                   hintText: 'Send a message',
                                   hintStyle: TextStyle(color: Colors.white70),
                                   filled: true,
-                                  fillColor: Colors.indigo[100],
+                                  fillColor: Colors.lightBlue[100], // Changed to light blue color
                                   enabledBorder: OutlineInputBorder(
                                     borderSide: BorderSide(color: Colors.indigo),
                                   ),
@@ -172,4 +172,3 @@ class _ChatScreenState extends State<ChatScreen> {
     );
   }
 }
-
