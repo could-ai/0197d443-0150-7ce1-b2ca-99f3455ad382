@@ -30,12 +30,12 @@ class ChatScreen extends StatefulWidget {
 
 class _ChatScreenState extends State<ChatScreen> {
   final Map<String, List<String>> _contactMessages = {
-    'Contact 1': ['Hello from Contact 1'],
-    'Contact 2': ['Hello from Contact 2'],
-    'Contact 3': ['Hello from Contact 3'],
+    'Lancelot': ['Hello from Lancelot'],
+    'Susu': ['Hello from Susu'],
+    'Cici': ['Hello from Cici'],
   };
 
-  String _selectedContact = 'Contact 1';
+  String _selectedContact = 'Lancelot';
   final TextEditingController _controller = TextEditingController();
 
   // New variable to hold the background color.
