@@ -154,9 +154,13 @@ class _ChatScreenState extends State<ChatScreen> {
                                 onSubmitted: (_) => _sendMessage(),
                               ),
                             ),
-                            IconButton(
-                              icon: const Icon(Icons.send, color: Colors.indigo),
-                              onPressed: _sendMessage,
+                            Material(
+                              color: Colors.transparent,
+                              child: IconButton(
+                                icon: const Icon(Icons.send, size: 30.0, color: Colors.white),
+                                onPressed: _sendMessage,
+                                splashRadius: 20.0,
+                              ),
                             ),
                           ],
                         ),
