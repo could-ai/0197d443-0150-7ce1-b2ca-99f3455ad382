@@ -155,7 +155,7 @@ class _ChatScreenState extends State<ChatScreen> {
                               ),
                             ),
                             IconButton(
-                              icon: const Icon(Icons.send, color: Colors.indigoAccent),
+                              icon: const Icon(Icons.send, color: Colors.blue), // Changed to blue color
                               onPressed: _sendMessage,
                             ),
                           ],
@@ -172,3 +172,4 @@ class _ChatScreenState extends State<ChatScreen> {
     );
   }
 }
+
