@@ -116,10 +116,11 @@ class _ChatScreenState extends State<ChatScreen> {
                               borderSide: BorderSide(color: Colors.white),
                             ),
                           ),
+                          onSubmitted: (_) => _sendMessage(),
                         ),
                       ),
                       IconButton(
-                        icon: const Icon(Icons.send, color: Colors.blue),
+                        icon: const Icon(Icons.send, color: Colors.lightBlueAccent),
                         onPressed: _sendMessage,
                       ),
                     ],
