@@ -32,7 +32,8 @@ class _ChatScreenState extends State<ChatScreen> {
   final Map<String, List<String>> _contactMessages = {
     'Lancelot': ['Hello from Lancelot'],
     'Susu': ['Hello from Susu'],
-    'Cici': ['Hello from Cici']
+    'Cici': ['Hello from Cici'],
+    'bluesky': ['Hello from Bluesky'] // Added bluesky contact
   };
 
   String _selectedContact = 'Lancelot';
