@@ -35,7 +35,6 @@ class _ChatScreenState extends State<ChatScreen> {
     'Cici': ['Hello from Cici'],
     'bluesky': ['Hello from Bluesky'],
     'timo': ['Hello from Timo'],
-    // Removed 'couldai'
   };
 
   String _selectedContact = 'Lancelot';
@@ -50,6 +49,38 @@ class _ChatScreenState extends State<ChatScreen> {
       });
       _controller.clear();
     }
+  }
+
+  void _deleteContact(String contact) {
+    showDialog(
+      context: context,
+      builder: (BuildContext context) {
+        return AlertDialog(
+          title: Text('Delete Contact'),
+          content: Text('Are you sure you want to delete $contact?'),
+          actions: <Widget>[
+            TextButton(
+              child: Text('Cancel'),
+              onPressed: () {
+                Navigator.of(context).pop();
+              },
+            ),
+            TextButton(
+              child: Text('Delete'),
+              onPressed: () {
+                setState(() {
+                  _contactMessages.remove(contact);
+                  if (_selectedContact == contact && _contactMessages.isNotEmpty) {
+                    _selectedContact = _contactMessages.keys.first;
+                  }
+                });
+                Navigator.of(context).pop();
+              },
+            ),
+          ],
+        );
+      },
+    );
   }
 
   @override
@@ -101,6 +132,10 @@ class _ChatScreenState extends State<ChatScreen> {
                           style: TextStyle(
                             color: _selectedContact == contact ? Colors.deepPurple : Colors.white,
                           ),
+                        ),
+                        trailing: IconButton(
+                          icon: Icon(Icons.delete, color: Colors.red),
+                          onPressed: () => _deleteContact(contact),
                         ),
                         onTap: () {
                           setState(() {
