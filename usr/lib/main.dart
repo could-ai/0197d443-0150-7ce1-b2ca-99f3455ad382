@@ -13,8 +13,8 @@ class MyApp extends StatelessWidget {
       title: 'Chat App',
       debugShowCheckedModeBanner: false,
       theme: ThemeData(
-        colorScheme: ColorScheme.fromSeed(seedColor: Colors.deepPurple),
-        scaffoldBackgroundColor: Colors.black,
+        colorScheme: ColorScheme.fromSeed(seedColor: Colors.lightBlueAccent),
+        scaffoldBackgroundColor: Colors.white,
       ),
       home: const ChatScreen(),
     );
@@ -52,7 +52,7 @@ class _ChatScreenState extends State<ChatScreen> {
     return Scaffold(
       appBar: AppBar(
         title: const Text('Chat Dialog'),
-        backgroundColor: Colors.deepPurple,
+        backgroundColor: Colors.lightBlueAccent,
       ),
       body: Row(
         children: <Widget>[
@@ -65,7 +65,7 @@ class _ChatScreenState extends State<ChatScreen> {
                   title: Text(
                     contact,
                     style: TextStyle(
-                      color: _selectedContact == contact ? Colors.blue : Colors.white,
+                      color: _selectedContact == contact ? Colors.deepPurple : Colors.black87,
                     ),
                   ),
                   onTap: () {
@@ -73,6 +73,7 @@ class _ChatScreenState extends State<ChatScreen> {
                       _selectedContact = contact;
                     });
                   },
+                  tileColor: _selectedContact == contact ? Colors.blue[50] : null,
                 );
               }).toList(),
             ),
@@ -89,7 +90,7 @@ class _ChatScreenState extends State<ChatScreen> {
                       return ListTile(
                         title: Text(
                           _contactMessages[_selectedContact]?[index] ?? '',
-                          style: TextStyle(color: Colors.white),
+                          style: TextStyle(color: Colors.black87),
                         ),
                       );
                     },
@@ -103,17 +104,17 @@ class _ChatScreenState extends State<ChatScreen> {
                       Expanded(
                         child: TextField(
                           controller: _controller,
-                          style: TextStyle(color: Colors.white),
+                          style: TextStyle(color: Colors.black87),
                           decoration: const InputDecoration(
                             hintText: 'Send a message',
-                            hintStyle: TextStyle(color: Colors.white54),
+                            hintStyle: TextStyle(color: Colors.black38),
                             filled: true,
-                            fillColor: Colors.black12,
+                            fillColor: Colors.blue[50],
                             enabledBorder: OutlineInputBorder(
-                              borderSide: BorderSide(color: Colors.white54),
+                              borderSide: BorderSide(color: Colors.lightBlueAccent),
                             ),
                             focusedBorder: OutlineInputBorder(
-                              borderSide: BorderSide(color: Colors.white),
+                              borderSide: BorderSide(color: Colors.blue),
                             ),
                           ),
                           onSubmitted: (_) => _sendMessage(),
