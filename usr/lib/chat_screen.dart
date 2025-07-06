@@ -14,12 +14,13 @@ class _ChatScreenState extends State<ChatScreen> {
     'Cici': ['Hello from Cici'],
     'bluesky': ['Hello from Bluesky'],
     'timo': ['Hello from Timo'],
-    'couldai': ['Hello from CouldAI'],  // Added the new contact
+    'couldai': ['Hello from CouldAI'],
   };
 
   String _selectedContact = 'Lancelot';
   final TextEditingController _controller = TextEditingController();
-
+  final TextEditingController _newContactController = TextEditingController();
+  
   Color _backgroundColor = Colors.blueGrey[900]!;
 
   void _sendMessage() {
@@ -63,6 +64,18 @@ class _ChatScreenState extends State<ChatScreen> {
     );
   }
 
+  void _addContact() {
+    if (_newContactController.text.isNotEmpty) {
+      setState(() {
+        if (!_contactMessages.containsKey(_newContactController.text)) {
+          _contactMessages[_newContactController.text] = [];
+          _selectedContact = _newContactController.text;
+        }
+      });
+      _newContactController.clear();
+    }
+  }
+
   @override
   Widget build(BuildContext context) {
     return Scaffold(
@@ -95,6 +108,35 @@ class _ChatScreenState extends State<ChatScreen> {
                       }
                     });
                   },
+                ),
+              ],
+            ),
+          ),
+          Padding(
+            padding: const EdgeInsets.all(8.0),
+            child: Row(
+              children: <Widget>[
+                Expanded(
+                  child: TextField(
+                    controller: _newContactController,
+                    style: TextStyle(color: Colors.white),
+                    decoration: InputDecoration(
+                      hintText: 'Add a new contact',
+                      hintStyle: TextStyle(color: Colors.white54),
+                      filled: true,
+                      fillColor: Colors.grey[800],
+                      enabledBorder: OutlineInputBorder(
+                        borderSide: BorderSide(color: Colors.grey[700]!),
+                      ),
+                      focusedBorder: OutlineInputBorder(
+                        borderSide: BorderSide(color: Colors.blueAccent),
+                      ),
+                    ),
+                  ),
+                ),
+                IconButton(
+                  icon: Icon(Icons.add, color: Colors.green),
+                  onPressed: _addContact,
                 ),
               ],
             ),
