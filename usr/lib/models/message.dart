@@ -1,4 +1,4 @@
-// Author: lancelot
+// Author: couldai
 
 class Message {
   final String id;
