@@ -1,3 +1,5 @@
+// Author: bluesky
+
 class Message {
   final String id;
   final String contactName;
