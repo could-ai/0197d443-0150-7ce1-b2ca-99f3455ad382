@@ -82,7 +82,7 @@ class _ChatScreenState extends State<ChatScreen> {
   Widget build(BuildContext context) {
     return Scaffold(
       appBar: AppBar(
-        title: const Text('Chat Dialog'),
+        title: const Text('Chat with CouldAI'),
         backgroundColor: Colors.indigoAccent,
         elevation: 0,
       ),
