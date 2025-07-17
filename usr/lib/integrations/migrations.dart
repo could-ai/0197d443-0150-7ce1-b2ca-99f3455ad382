@@ -35,5 +35,15 @@ class DatabaseMigrations {
       "sql": "ALTER TABLE contacts ADD COLUMN gender TEXT;",
       "executed_at": "2025-07-17T12:23:30Z",
     },
+      {
+      "description": "Update existing contacts with gender information",
+      "sql": "UPDATE contacts SET gender = 'Male' WHERE name = 'Lancelot';
+UPDATE contacts SET gender = 'Female' WHERE name = 'Susu';
+UPDATE contacts SET gender = 'Female' WHERE name = 'Cici';
+UPDATE contacts SET gender = 'Male' WHERE name = 'bluesky';
+UPDATE contacts SET gender = 'Male' WHERE name = 'timo';
+UPDATE contacts SET gender = 'Male' WHERE name = 'couldai';",
+      "executed_at": "2025-07-17T12:29:36Z",
+    },
   ];
 }
