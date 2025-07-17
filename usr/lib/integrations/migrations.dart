@@ -30,5 +30,10 @@ class DatabaseMigrations {
       "sql": "ALTER TABLE contacts ADD COLUMN created_at TIMESTAMP WITH TIME ZONE DEFAULT CURRENT_TIMESTAMP;",
       "executed_at": "2025-07-17T12:16:57Z",
     },
+      {
+      "description": "Add gender column to the contacts table",
+      "sql": "ALTER TABLE contacts ADD COLUMN gender TEXT;",
+      "executed_at": "2025-07-17T12:23:30Z",
+    },
   ];
 }
