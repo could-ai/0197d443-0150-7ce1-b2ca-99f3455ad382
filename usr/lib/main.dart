@@ -34,18 +34,17 @@ class AuthWrapper extends StatelessWidget {
     return StreamBuilder<AuthState>(
       stream: Supabase.instance.client.auth.onAuthStateChange,
       builder: (context, snapshot) {
-        // 检查认证状态
         if (snapshot.connectionState == ConnectionState.waiting) {
           return const Center(child: CircularProgressIndicator());
         }
         
-        // 用户已登录
-        if (snapshot.hasData && snapshot.data?.session != null) {
-          return const ChatScreen();
-        }
+        final session = snapshot.data?.session;
         
-        // 用户未登录
-        return const LoginScreen();
+        if (session != null) {
+          return const ChatScreen();
+        } else {
+          return const LoginScreen();
+        }
       },
     );
   }

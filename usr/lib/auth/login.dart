@@ -73,7 +73,11 @@ class _LoginScreenState extends State<LoginScreen> {
               TextFormField(
                 controller: _passwordController,
                 decoration: const InputDecoration(labelText: '密码'),
-                validator: (value) => value!.isEmpty ? '请输入密码' : null,
+                validator: (value) {
+                  if (value!.isEmpty) return '请输入密码';
+                  if (value.length < 6) return '密码至少6位';
+                  return null;
+                },
                 obscureText: true,
               ),
               if (_errorMessage != null) ...[

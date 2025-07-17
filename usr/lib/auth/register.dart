@@ -112,7 +112,7 @@ class _RegisterScreenState extends State<RegisterScreen> {
                 child: const Text('已有账号？立即登录'),
               ),
             ],
-          },
+          ),
         ),
       ),
     );
