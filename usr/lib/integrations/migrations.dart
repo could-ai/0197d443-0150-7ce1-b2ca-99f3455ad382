@@ -45,5 +45,10 @@ UPDATE contacts SET gender = 'Male' WHERE name = 'timo';
 UPDATE contacts SET gender = 'Male' WHERE name = 'couldai';",
       "executed_at": "2025-07-17T12:29:36Z",
     },
+      {
+      "description": "Insert a new contact into the contacts table",
+      "sql": "INSERT INTO contacts (name, phone_number, email, gender) VALUES ('Alex Johnson', '789-012-3456', 'alex.johnson@example.com', 'Male');",
+      "executed_at": "2025-07-17T12:51:10Z",
+    },
   ];
 }
