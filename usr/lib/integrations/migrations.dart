@@ -14,5 +14,16 @@ class DatabaseMigrations {
 );",
       "executed_at": "2025-07-17T11:21:27Z",
     },
+      {
+      "description": "Insert initial contacts into the contacts table",
+      "sql": "INSERT INTO contacts (name, phone_number, email) VALUES
+  ('Lancelot', '123-456-7890', 'lancelot@example.com'),
+  ('Susu', '234-567-8901', 'susu@example.com'),
+  ('Cici', '345-678-9012', 'cici@example.com'),
+  ('bluesky', '456-789-0123', 'bluesky@example.com'),
+  ('timo', '567-890-1234', 'timo@example.com'),
+  ('couldai', '678-901-2345', 'couldai@example.com');",
+      "executed_at": "2025-07-17T12:01:57Z",
+    },
   ];
 }
