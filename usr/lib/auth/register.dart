@@ -23,8 +23,10 @@ class _RegisterScreenState extends State<RegisterScreen> {
       if (response.error != null) {
         throw response.error!;
       }
+      print('User registered: ${response.user?.email}');
       Navigator.of(context).pop(); // Return to login screen
     } catch (error) {
+      print('Registration error: $error');
       showDialog(
         context: context,
         builder: (context) => AlertDialog(

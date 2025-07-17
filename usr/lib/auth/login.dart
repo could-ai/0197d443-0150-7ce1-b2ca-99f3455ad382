@@ -24,8 +24,10 @@ class _LoginScreenState extends State<LoginScreen> {
       if (response.error != null) {
         throw response.error!;
       }
+      print('User logged in: ${response.user?.email}');
       Navigator.of(context).pushReplacement(MaterialPageRoute(builder: (_) => const ChatScreen()));
     } catch (error) {
+      print('Login error: $error');
       showDialog(
         context: context,
         builder: (context) => AlertDialog(
