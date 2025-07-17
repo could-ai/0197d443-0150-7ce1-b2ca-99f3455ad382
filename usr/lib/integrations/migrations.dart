@@ -25,5 +25,10 @@ class DatabaseMigrations {
   ('couldai', '678-901-2345', 'couldai@example.com');",
       "executed_at": "2025-07-17T12:01:57Z",
     },
+      {
+      "description": "Add 'created_at' column to contacts table",
+      "sql": "ALTER TABLE contacts ADD COLUMN created_at TIMESTAMP WITH TIME ZONE DEFAULT CURRENT_TIMESTAMP;",
+      "executed_at": "2025-07-17T12:16:57Z",
+    },
   ];
 }
