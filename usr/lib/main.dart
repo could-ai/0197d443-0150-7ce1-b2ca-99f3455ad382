@@ -1,25 +1,28 @@
-// Author: couldai
-
 import 'package:flutter/material.dart';
-import 'chat_screen.dart';
+import 'package:supabase_flutter/supabase_flutter.dart';
+import 'auth/login.dart';
 
-void main() {
+void main() async {
+  WidgetsFlutterBinding.ensureInitialized();
+  await Supabase.initialize(
+    url: SupabaseConfig.supabaseUrl,
+    anonKey: SupabaseConfig.supabaseAnonKey,
+  );
   runApp(const MyApp());
 }
 
 class MyApp extends StatelessWidget {
-  const MyApp({super.key});
+  const MyApp({Key? key}) : super(key: key);
 
   @override
   Widget build(BuildContext context) {
     return MaterialApp(
-      title: 'could chat',
+      title: 'CouldAI User App',
       debugShowCheckedModeBanner: false,
       theme: ThemeData(
-        colorScheme: ColorScheme.fromSeed(seedColor: Colors.indigo),
-        scaffoldBackgroundColor: Colors.blueGrey[900],
+        primarySwatch: Colors.indigo,
       ),
-      home: const ChatScreen(),
+      home: const LoginScreen(),
     );
   }
 }
