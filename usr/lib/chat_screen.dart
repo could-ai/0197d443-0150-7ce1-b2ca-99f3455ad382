@@ -23,7 +23,7 @@ class _ChatScreenState extends State<ChatScreen> {
   final TextEditingController _controller = TextEditingController();
   final TextEditingController _newContactController = TextEditingController();
   
-  Color _backgroundColor = Colors.blueGrey[900]!;
+  Color _backgroundColor = Colors.white;
 
   void _sendMessage() {
     if (_controller.text.isNotEmpty) {
@@ -83,7 +83,8 @@ class _ChatScreenState extends State<ChatScreen> {
     return Scaffold(
       appBar: AppBar(
         title: const Text('Chat Dialog'),
-        backgroundColor: Colors.indigo,
+        backgroundColor: Colors.indigoAccent,
+        elevation: 0,
       ),
       backgroundColor: _backgroundColor,
       body: Column(
@@ -91,53 +92,26 @@ class _ChatScreenState extends State<ChatScreen> {
           Padding(
             padding: const EdgeInsets.all(8.0),
             child: Row(
-              mainAxisAlignment: MainAxisAlignment.center,
-              children: [
-                const Text('Select Background Color: ', style: TextStyle(color: Colors.white)),
-                DropdownButton<Color>(
-                  value: _backgroundColor,
-                  items: <Color>[Colors.blueGrey[900]!, Colors.indigo, Colors.green]
-                      .map((Color color) {
-                    return DropdownMenuItem<Color>(
-                      value: color,
-                      child: Container(width: 100, height: 20, color: color),
-                    );
-                  }).toList(),
-                  onChanged: (Color? newColor) {
-                    setState(() {
-                      if (newColor != null) {
-                        _backgroundColor = newColor;
-                      }
-                    });
-                  },
-                ),
-              ],
-            ),
-          ),
-          Padding(
-            padding: const EdgeInsets.all(8.0),
-            child: Row(
               children: <Widget>[
                 Expanded(
                   child: TextField(
                     controller: _newContactController,
-                    style: TextStyle(color: Colors.white),
+                    style: TextStyle(color: Colors.black87),
                     decoration: InputDecoration(
                       hintText: 'Add a new contact',
-                      hintStyle: TextStyle(color: Colors.white54),
+                      hintStyle: TextStyle(color: Colors.black38),
                       filled: true,
-                      fillColor: Colors.grey[800],
-                      enabledBorder: OutlineInputBorder(
-                        borderSide: BorderSide(color: Colors.grey[700]!),
+                      fillColor: Colors.white,
+                      border: OutlineInputBorder(
+                        borderRadius: BorderRadius.circular(8.0),
+                        borderSide: BorderSide.none,
                       ),
-                      focusedBorder: OutlineInputBorder(
-                        borderSide: BorderSide(color: Colors.blueAccent),
-                      ),
+                      contentPadding: EdgeInsets.symmetric(horizontal: 16.0),
                     ),
                   ),
                 ),
                 IconButton(
-                  icon: Icon(Icons.add, color: Colors.green),
+                  icon: Icon(Icons.add_circle, color: Colors.indigoAccent),
                   onPressed: _addContact,
                 ),
               ],
@@ -148,27 +122,40 @@ class _ChatScreenState extends State<ChatScreen> {
               children: <Widget>[
                 Expanded(
                   flex: 1,
-                  child: ListView(
-                    children: _contactMessages.keys.map((contact) {
-                      return ListTile(
-                        title: Text(
-                          contact,
-                          style: TextStyle(
-                            color: _selectedContact == contact ? Colors.deepPurple : Colors.white,
+                  child: Container(
+                    decoration: BoxDecoration(
+                      color: Colors.white,
+                      boxShadow: [
+                        BoxShadow(
+                          color: Colors.black12,
+                          blurRadius: 4,
+                          offset: Offset(0, 2),
+                        ),
+                      ],
+                    ),
+                    child: ListView(
+                      children: _contactMessages.keys.map((contact) {
+                        return ListTile(
+                          title: Text(
+                            contact,
+                            style: TextStyle(
+                              color: _selectedContact == contact ? Colors.indigoAccent : Colors.black87,
+                              fontWeight: _selectedContact == contact ? FontWeight.bold : FontWeight.normal,
+                            ),
                           ),
-                        ),
-                        trailing: IconButton(
-                          icon: Icon(Icons.delete, color: Colors.red),
-                          onPressed: () => _deleteContact(contact),
-                        ),
-                        onTap: () {
-                          setState(() {
-                            _selectedContact = contact;
-                          });
-                        },
-                        tileColor: _selectedContact == contact ? Colors.indigo[100] : null,
-                      );
-                    }).toList(),
+                          trailing: IconButton(
+                            icon: Icon(Icons.delete_forever, color: Colors.red),
+                            onPressed: () => _deleteContact(contact),
+                          ),
+                          onTap: () {
+                            setState(() {
+                              _selectedContact = contact;
+                            });
+                          },
+                          tileColor: _selectedContact == contact ? Colors.indigo[50] : Colors.white,
+                        );
+                      }).toList(),
+                    ),
                   ),
                 ),
                 Expanded(
@@ -182,7 +169,7 @@ class _ChatScreenState extends State<ChatScreen> {
                             return ListTile(
                               title: Text(
                                 _contactMessages[_selectedContact]?[index] ?? '',
-                                style: TextStyle(color: Colors.white),
+                                style: TextStyle(color: Colors.black87),
                               ),
                             );
                           },
@@ -190,25 +177,24 @@ class _ChatScreenState extends State<ChatScreen> {
                       ),
                       const Divider(height: 1.0),
                       Container(
-                        padding: const EdgeInsets.all(10.0),
-                        color: Colors.black54,
+                        padding: const EdgeInsets.all(8.0),
+                        color: Colors.grey[200],
                         child: Row(
                           children: <Widget>[
                             Expanded(
                               child: TextField(
                                 controller: _controller,
-                                style: TextStyle(color: Colors.white),
+                                style: TextStyle(color: Colors.black87),
                                 decoration: InputDecoration(
-                                  hintText: 'Send a message',
-                                  hintStyle: TextStyle(color: Colors.white54),
+                                  hintText: 'Type a message',
+                                  hintStyle: TextStyle(color: Colors.black54),
                                   filled: true,
-                                  fillColor: Colors.grey[800],
-                                  enabledBorder: OutlineInputBorder(
-                                    borderSide: BorderSide(color: Colors.grey[700]!),
+                                  fillColor: Colors.white,
+                                  border: OutlineInputBorder(
+                                    borderRadius: BorderRadius.circular(8.0),
+                                    borderSide: BorderSide.none,
                                   ),
-                                  focusedBorder: OutlineInputBorder(
-                                    borderSide: BorderSide(color: Colors.blueAccent),
-                                  ),
+                                  contentPadding: EdgeInsets.symmetric(horizontal: 16.0),
                                 ),
                                 onSubmitted: (_) => _sendMessage(),
                               ),
@@ -216,7 +202,7 @@ class _ChatScreenState extends State<ChatScreen> {
                             Material(
                               color: Colors.transparent,
                               child: IconButton(
-                                icon: const Icon(Icons.send, size: 30.0, color: Colors.white),
+                                icon: const Icon(Icons.send, size: 30.0, color: Colors.indigoAccent),
                                 onPressed: _sendMessage,
                                 splashRadius: 20.0,
                               ),
