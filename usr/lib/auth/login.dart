@@ -31,19 +31,15 @@ class _LoginScreenState extends State<LoginScreen> {
         password: _passwordController.text.trim(),
       );
       
-      if (response.user != null) {
-        if (!mounted) return;
-        Navigator.of(context).pushReplacement(
-          MaterialPageRoute(builder: (_) => const ChatScreen())
-        );
-      }
+      // 登录成功后，认证状态会自动更新，AuthWrapper会处理导航
+      // 不需要手动导航
     } on AuthException catch (e) {
       setState(() {
-        _errorMessage = e.message;
+        _errorMessage = '登录失败: ${e.message}';
       });
     } catch (e) {
       setState(() {
-        _errorMessage = '登录失败，请稍后重试';
+        _errorMessage = '登录失败，请稍后重试: $e';
       });
     } finally {
       if (mounted) {

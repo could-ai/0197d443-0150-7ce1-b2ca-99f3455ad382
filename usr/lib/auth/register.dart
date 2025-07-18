@@ -31,20 +31,15 @@ class _RegisterScreenState extends State<RegisterScreen> {
         password: _passwordController.text.trim(),
       );
       
-      if (response.user != null) {
-        if (!mounted) return;
-        ScaffoldMessenger.of(context).showSnackBar(
-          const SnackBar(content: Text('注册成功，请登录'))
-        );
-        Navigator.of(context).pop();
-      }
+      // 注册成功后会自动登录
+      // 认证状态更新由AuthWrapper处理
     } on AuthException catch (e) {
       setState(() {
-        _errorMessage = e.message;
+        _errorMessage = '注册失败: ${e.message}';
       });
     } catch (e) {
       setState(() {
-        _errorMessage = '注册失败，请稍后重试';
+        _errorMessage = '注册失败，请稍后重试: $e';
       });
     } finally {
       if (mounted) {
