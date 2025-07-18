@@ -2,16 +2,26 @@ import 'package:flutter/material.dart';
 import 'package:supabase_flutter/supabase_flutter.dart';
 import 'auth/login.dart';
 import 'chat_screen.dart';
+import 'integrations/supabase.dart';
 
 Future<void> main() async {
   WidgetsFlutterBinding.ensureInitialized();
   
-  // Reset auth state for testing
   try {
-    await SupabaseConfig.initialize();
+    // 强制初始化并开始
+    await Supabase.initialize(
+      url: SupabaseConfig.supabaseUrl,
+      anonKey: SupabaseConfig.supabaseAnonKey,
+      authOptions: const FlutterAuthOptions(
+        authFlowType: AuthFlowType.pkce,
+        storageKey: 'sb-auth',
+      ),
+      debug: true,
+    );
+    // 强制登出以确保每次都显示登录界面
     await Supabase.instance.client.auth.signOut();
   } catch (e) {
-    debugPrint('Initialization error: $e');
+    debugPrint('⚠️ Initialization Error: $e');
   }
   
   runApp(const MyApp());
@@ -23,10 +33,14 @@ class MyApp extends StatelessWidget {
   @override
   Widget build(BuildContext context) {
     return MaterialApp(
-      title: 'CouldAI User App',
+      title: 'CouldAI User Login',
       debugShowCheckedModeBanner: false,
       theme: ThemeData(
-        primarySwatch: Colors.indigo,
+        useMaterial3: true,
+        colorScheme: ColorScheme.fromSeed(
+          seedColor: Colors.indigo,
+          error: Colors.redAccent,
+        ),
       ),
       home: const AuthWrapper(),
     );
@@ -41,46 +55,36 @@ class AuthWrapper extends StatefulWidget {
 }
 
 class _AuthWrapperState extends State<AuthWrapper> {
-  bool _initialized = false;
+  bool _isReady = false;
 
   @override
   void initState() {
     super.initState();
-    _verifyAuth();
+    _prepareAuth();
   }
 
-  Future<void> _verifyAuth() async {
+  Future<void> _prepareAuth() async {
     try {
-      // Force fresh auth state
-      final session = Supabase.instance.client.auth.currentSession;
-      
-      // If you want to guarantee login screen shows:
-      // await Supabase.instance.client.auth.signOut();
-      
-      setState(() => _initialized = true);
+      await Future.delayed(const Duration(milliseconds: 300));
+      setState(() => _isReady = true);
     } catch (e) {
-      debugPrint('Auth verification error: $e');
+      debugPrint('😡 Auth setup failed: $e');
     }
   }
 
   @override
   Widget build(BuildContext context) {
-    if (!_initialized) {
-      return const Scaffold(body: Center(child: CircularProgressIndicator()));
+    if (!_isReady) {
+      return const Scaffold(
+        body: Center(child: CircularProgressIndicator(color: Colors.indigo)),
+      );
     }
     
     return StreamBuilder<AuthState>(
       stream: Supabase.instance.client.auth.onAuthStateChange,
       builder: (context, snapshot) {
-        // FOR TESTING - Force login screen
-        // return const LoginScreen();
-        
-        if (snapshot.connectionState == ConnectionState.waiting) {
-          return const Center(child: CircularProgressIndicator());
-        }
-        
-        return snapshot.data?.session != null
-            ? const ChatScreen()
+        return snapshot.data?.session != null 
+            ? const ChatScreen() 
             : const LoginScreen();
       },
     );
