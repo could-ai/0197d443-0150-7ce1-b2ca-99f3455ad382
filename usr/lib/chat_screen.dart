@@ -82,7 +82,7 @@ class _ChatScreenState extends State<ChatScreen> {
   Widget build(BuildContext context) {
     return Scaffold(
       appBar: AppBar(
-        title: const Text('Chat with Bluesky'),
+        title: const Text('Chat with CouldAI'),
         backgroundColor: Colors.indigoAccent,
         elevation: 0,
       ),
@@ -150,73 +150,71 @@ class _ChatScreenState extends State<ChatScreen> {
                           onTap: () {
                             setState(() {
                               _selectedContact = contact;
-                            });
-                          },
-                          tileColor: _selectedContact == contact ? Colors.indigo[50] : Colors.white,
+                        });
+                      },
+                      tileColor: _selectedContact == contact ? Colors.indigo[50] : Colors.white,
+                    );
+                  }).toList(),
+                ),
+              ),
+            ),
+            Expanded(
+              flex: 3,
+              child: Column(
+                children: <Widget>[
+                  Expanded(
+                    child: ListView.builder(
+                      itemCount: _contactMessages[_selectedContact]?.length ?? 0,
+                      itemBuilder: (context, index) {
+                        return ListTile(
+                          title: Text(
+                            _contactMessages[_selectedContact]?[index] ?? '',
+                            style: TextStyle(color: Colors.black87),
+                          ),
                         );
-                      }).toList(),
+                      },
                     ),
                   ),
-                ),
-                Expanded(
-                  flex: 3,
-                  child: Column(
-                    children: <Widget>[
-                      Expanded(
-                        child: ListView.builder(
-                          itemCount: _contactMessages[_selectedContact]?.length ?? 0,
-                          itemBuilder: (context, index) {
-                            return ListTile(
-                              title: Text(
-                                _contactMessages[_selectedContact]?[index] ?? '',
-                                style: TextStyle(color: Colors.black87),
+                  const Divider(height: 1.0),
+                  Container(
+                    padding: const EdgeInsets.all(8.0),
+                    color: Colors.grey[200],
+                    child: Row(
+                      children: <Widget>[
+                        Expanded(
+                          child: TextField(
+                            controller: _controller,
+                            style: TextStyle(color: Colors.black87),
+                            decoration: InputDecoration(
+                              hintText: 'Type a message',
+                              hintStyle: TextStyle(color: Colors.black54),
+                              filled: true,
+                              fillColor: Colors.white,
+                              border: OutlineInputBorder(
+                                borderRadius: BorderRadius.circular(8.0),
+                                borderSide: BorderSide.none,
                               ),
-                            );
-                          },
-                        ),
-                      ),
-                      const Divider(height: 1.0),
-                      Container(
-                        padding: const EdgeInsets.all(8.0),
-                        color: Colors.grey[200],
-                        child: Row(
-                          children: <Widget>[
-                            Expanded(
-                              child: TextField(
-                                controller: _controller,
-                                style: TextStyle(color: Colors.black87),
-                                decoration: InputDecoration(
-                                  hintText: 'Type a message',
-                                  hintStyle: TextStyle(color: Colors.black54),
-                                  filled: true,
-                                  fillColor: Colors.white,
-                                  border: OutlineInputBorder(
-                                    borderRadius: BorderRadius.circular(8.0),
-                                    borderSide: BorderSide.none,
-                                  ),
-                                  contentPadding: EdgeInsets.symmetric(horizontal: 16.0),
-                                ),
-                                onSubmitted: (_) => _sendMessage(),
-                              ),
+                              contentPadding: EdgeInsets.symmetric(horizontal: 16.0),
                             ),
-                            Material(
-                              color: Colors.transparent,
-                              child: IconButton(
-                                icon: const Icon(Icons.send, size: 30.0, color: Colors.indigoAccent),
-                                onPressed: _sendMessage,
-                                splashRadius: 20.0,
-                              ),
-                            ),
-                          ],
+                            onSubmitted: (_) => _sendMessage(),
+                          ),
                         ),
-                      ),
-                    ],
+                        Material(
+                          color: Colors.transparent,
+                          child: IconButton(
+                            icon: const Icon(Icons.send, size: 30.0, color: Colors.indigoAccent),
+                            onPressed: _sendMessage,
+                            splashRadius: 20.0,
+                          ),
+                        ),
+                      ],
+                    ),
                   ),
-                ),
-              ],
+                ],
+              ),
             ),
-          ),
-        ],
+          ],
+        ),
       ),
     );
   }
