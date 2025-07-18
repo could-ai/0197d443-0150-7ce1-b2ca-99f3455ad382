@@ -6,7 +6,13 @@ import 'chat_screen.dart';
 Future<void> main() async {
   WidgetsFlutterBinding.ensureInitialized();
   
-  await SupabaseConfig.initialize();
+  // Reset auth state for testing
+  try {
+    await SupabaseConfig.initialize();
+    await Supabase.instance.client.auth.signOut();
+  } catch (e) {
+    debugPrint('Initialization error: $e');
+  }
   
   runApp(const MyApp());
 }
@@ -27,25 +33,55 @@ class MyApp extends StatelessWidget {
   }
 }
 
-class AuthWrapper extends StatelessWidget {
+class AuthWrapper extends StatefulWidget {
   const AuthWrapper({Key? key}) : super(key: key);
 
   @override
+  State<AuthWrapper> createState() => _AuthWrapperState();
+}
+
+class _AuthWrapperState extends State<AuthWrapper> {
+  bool _initialized = false;
+
+  @override
+  void initState() {
+    super.initState();
+    _verifyAuth();
+  }
+
+  Future<void> _verifyAuth() async {
+    try {
+      // Force fresh auth state
+      final session = Supabase.instance.client.auth.currentSession;
+      
+      // If you want to guarantee login screen shows:
+      // await Supabase.instance.client.auth.signOut();
+      
+      setState(() => _initialized = true);
+    } catch (e) {
+      debugPrint('Auth verification error: $e');
+    }
+  }
+
+  @override
   Widget build(BuildContext context) {
+    if (!_initialized) {
+      return const Scaffold(body: Center(child: CircularProgressIndicator()));
+    }
+    
     return StreamBuilder<AuthState>(
       stream: Supabase.instance.client.auth.onAuthStateChange,
       builder: (context, snapshot) {
+        // FOR TESTING - Force login screen
+        // return const LoginScreen();
+        
         if (snapshot.connectionState == ConnectionState.waiting) {
           return const Center(child: CircularProgressIndicator());
         }
         
-        final session = snapshot.data?.session;
-        
-        if (session != null) {
-          return const ChatScreen();
-        } else {
-          return const LoginScreen();
-        }
+        return snapshot.data?.session != null
+            ? const ChatScreen()
+            : const LoginScreen();
       },
     );
   }
