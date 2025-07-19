@@ -1,6 +1,6 @@
 import 'package:flutter/material.dart';
 import 'package:supabase_flutter/supabase_flutter.dart';
-auth/login.dart';
+import 'auth/login.dart';
 import 'chat_screen.dart';
 import 'integrations/supabase.dart';
 
