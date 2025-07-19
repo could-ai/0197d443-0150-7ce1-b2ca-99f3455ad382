@@ -1,6 +1,6 @@
 import 'package:flutter/material.dart';
 import 'package:supabase_flutter/supabase_flutter.dart';
-import 'auth/login.dart';
+auth/login.dart';
 import 'chat_screen.dart';
 import 'integrations/supabase.dart';
 
@@ -12,10 +12,6 @@ Future<void> main() async {
     await Supabase.initialize(
       url: SupabaseConfig.supabaseUrl,
       anonKey: SupabaseConfig.supabaseAnonKey,
-      authOptions: const FlutterAuthOptions(
-        authFlowType: AuthFlowType.pkce,
-        storageKey: 'sb-auth',
-      ),
       debug: true,
     );
     // 强制登出以确保每次都显示登录界面
