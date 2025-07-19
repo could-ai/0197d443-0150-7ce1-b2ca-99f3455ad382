@@ -9,10 +9,6 @@ class SupabaseConfig {
     await Supabase.initialize(
       url: supabaseUrl,
       anonKey: supabaseAnonKey,
-      authOptions: const FlutterAuthOptions(
-        authFlowType: AuthFlowType.pkce,
-        storageKey: 'sb-auth',
-      ),
       debug: true,
     );
   }
