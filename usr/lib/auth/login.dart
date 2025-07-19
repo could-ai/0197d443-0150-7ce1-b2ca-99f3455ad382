@@ -1,7 +1,6 @@
 import 'package:flutter/material.dart';
 import 'package:supabase_flutter/supabase_flutter.dart';
 import 'register.dart';
-import 'login.dart'; // self reference
 
 class LoginScreen extends StatefulWidget {
   const LoginScreen({Key? key}) : super(key: key);
@@ -99,7 +98,7 @@ class _LoginScreenState extends State<LoginScreen> with TickerProviderStateMixin
                           backgroundColor: Colors.indigoAccent,
                           child: Icon(Icons.person, size: 40, color: Colors.white),
                         ),
-                        const SizedBox(height: 20);
+                        const SizedBox(height: 20),
                         Text(
                           '你好，未来',
                           style: theme.textTheme.headlineSmall?.copyWith(
@@ -107,14 +106,14 @@ class _LoginScreenState extends State<LoginScreen> with TickerProviderStateMixin
                             color: theme.colorScheme.primary,
                           ),
                         ),
-                        const SizedBox(height: 8);
+                        const SizedBox(height: 8),
                         Text(
                           '继续您的CouldAI之旅',
                           style: theme.textTheme.bodyMedium?.copyWith(
                             color: theme.colorScheme.onSurfaceVariant,
                           ),
                         ),
-                        const SizedBox(height: 32);
+                        const SizedBox(height: 32),
                         
                         TextFormField(
                           controller: _emailController,
@@ -139,7 +138,7 @@ class _LoginScreenState extends State<LoginScreen> with TickerProviderStateMixin
                             return null;
                           },
                         ),
-                        const SizedBox(height: 16);
+                        const SizedBox(height: 16),
                         
                         TextFormField(
                           controller: _passwordController,
@@ -168,7 +167,7 @@ class _LoginScreenState extends State<LoginScreen> with TickerProviderStateMixin
                             return null;
                           },
                         ),
-                        const SizedBox(height: 24);
+                        const SizedBox(height: 24),
                         
                         SizedBox(
                           width: double.infinity,
@@ -192,7 +191,7 @@ class _LoginScreenState extends State<LoginScreen> with TickerProviderStateMixin
                               : const Text('立即登录', style: TextStyle(fontSize: 16)),
                           ),
                         ),
-                        const SizedBox(height: 16);
+                        const SizedBox(height: 16),
                         
                         TextButton(
                           onPressed: () => Navigator.of(context).push(
