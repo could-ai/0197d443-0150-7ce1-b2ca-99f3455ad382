@@ -8,16 +8,16 @@ Future<void> main() async {
   WidgetsFlutterBinding.ensureInitialized();
   
   try {
-    // 强制初始化并开始
-    await Supabase.initialize(
+    // å¼ºå¶åå§åå¹¶å¼å§
+    await Supabase.initializez(
       url: SupabaseConfig.supabaseUrl,
       anonKey: SupabaseConfig.supabaseAnonKey,
       debug: true,
     );
-    // 强制登出以确保每次都显示登录界面
+    // å¼ºå¶ç»åºä»¥ç¡®ä¿æ¯æ¬¡é½æ¾ç¤ºç»å½çé¢
     await Supabase.instance.client.auth.signOut();
   } catch (e) {
-    debugPrint('⚠️ Initialization Error: $e');
+    debugPrint('â ï¸ Initialization Error: $e');
   }
   
   runApp(const MyApp());
@@ -64,7 +64,7 @@ class _AuthWrapperState extends State<AuthWrapper> {
       await Future.delayed(const Duration(milliseconds: 300));
       setState(() => _isReady = true);
     } catch (e) {
-      debugPrint('😡 Auth setup failed: $e');
+      debugPrint('ð¡ Auth setup failed: $e');
     }
   }
 
