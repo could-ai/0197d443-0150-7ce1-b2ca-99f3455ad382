@@ -8,16 +8,16 @@ Future<void> main() async {
   WidgetsFlutterBinding.ensureInitialized();
   
   try {
-    // å¼ºå¶åå§åå¹¶å¼å§
-    await Supabase.initializez(
+    // Force initialization and start
+    await Supabase.initialize(
       url: SupabaseConfig.supabaseUrl,
       anonKey: SupabaseConfig.supabaseAnonKey,
       debug: true,
     );
-    // å¼ºå¶ç»åºä»¥ç¡®ä¿æ¯æ¬¡é½æ¾ç¤ºç»å½çé¢
+    // Force sign out to ensure the login screen is shown every time
     await Supabase.instance.client.auth.signOut();
   } catch (e) {
-    debugPrint('â ï¸ Initialization Error: $e');
+    debugPrint('⚠️ Initialization Error: $e');
   }
   
   runApp(const MyApp());
@@ -64,7 +64,7 @@ class _AuthWrapperState extends State<AuthWrapper> {
       await Future.delayed(const Duration(milliseconds: 300));
       setState(() => _isReady = true);
     } catch (e) {
-      debugPrint('ð¡ Auth setup failed: $e');
+      debugPrint('Auth setup failed: $e');
     }
   }
 
