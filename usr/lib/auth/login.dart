@@ -100,7 +100,7 @@ class _LoginScreenState extends State<LoginScreen> with TickerProviderStateMixin
                         ),
                         const SizedBox(height: 20),
                         Text(
-                          'welcome to vibe coding',
+                          'welcome to vibe coding with couldai',
                           style: theme.textTheme.headlineSmall?.copyWith(
                             fontWeight: FontWeight.bold,
                             color: theme.colorScheme.primary,
