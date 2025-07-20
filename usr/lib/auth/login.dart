@@ -100,7 +100,7 @@ class _LoginScreenState extends State<LoginScreen> with TickerProviderStateMixin
                         ),
                         const SizedBox(height: 20),
                         Text(
-                          '未来已来',
+                          '欢迎来到未来',
                           style: theme.textTheme.headlineSmall?.copyWith(
                             fontWeight: FontWeight.bold,
                             color: theme.colorScheme.primary,
